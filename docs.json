@@ -49,12 +49,17 @@
             "group": "Reference",
             "pages": [
               "reference/orchestrator-how-it-works",
+              "reference/orchestrator-api",
               "reference/implementation-plan",
               "reference/agent-handoff-prompt",
               "reference/documentation-guide"
             ]
           }
         ]
+      },
+      {
+        "tab": "API reference",
+        "openapi": "openapi.json"
       }
     ],
     "global": {

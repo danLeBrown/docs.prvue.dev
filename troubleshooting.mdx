@@ -173,10 +173,11 @@ Common issues and solutions for preview-deployer.
    lsof -i :{PORT}
    ```
 
-3. Cleanup old deployment:
+3. Cleanup old deployment (use the full deployment id from `GET /api/previews`, e.g. `my-org-my-app-12`):
    ```bash
-   curl -X DELETE http://SERVER_IP:3000/api/previews/{PR_NUMBER}
+   curl -X DELETE http://SERVER_IP:3000/api/previews/{deploymentId}
    ```
+   See [Orchestrator API](/reference/orchestrator-api) for full endpoint details.
 
 ### Nginx Configuration Errors
 
@@ -294,15 +295,15 @@ Common issues and solutions for preview-deployer.
    cat ~/.preview-deployer/config.yml | grep cleanup_ttl_days
    ```
 
-3. Manually trigger cleanup:
+3. Manually trigger cleanup (use deployment id from `GET /api/previews`, e.g. `my-org-my-app-12`):
 
    ```bash
-   curl -X DELETE http://SERVER_IP:3000/api/previews/{PR_NUMBER}
+   curl -X DELETE http://SERVER_IP:3000/api/previews/{deploymentId}
    ```
 
 4. Check deployment age:
    ```bash
-   cat /opt/preview-deployer/deployments.json | jq '.deployments."{PR_NUMBER}"'
+   cat /opt/preview-deployer/deployments.json | jq '.deployments."{deploymentId}"'
    ```
 
 ## Performance Issues
@@ -399,7 +400,7 @@ journalctl -u preview-deployer-orchestrator -n 50
 
 ### Manual Testing
 
-Test orchestrator API:
+Test orchestrator API (see [Orchestrator API](/reference/orchestrator-api) for full endpoint reference):
 
 ```bash
 curl http://SERVER_IP:3000/health
